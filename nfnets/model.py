@@ -126,13 +126,13 @@ class NFNet(nn.Module):
         self.body = nn.Sequential(*blocks)
 
         final_conv_channels = 2*in_channels
-        self.final_conv = WSConv2D(in_channels=out_channels, out_channels=final_conv_channels, kernel_size=1)
+        self.final_conv = WSConv2D(in_channels=out_channels, out_channels=final_conv_channels, kernel_size=1, bias=bias)
         self.pool = nn.AvgPool2d(1)
         
         if self.drop_rate > 0.:
             self.dropout = nn.Dropout(self.drop_rate)
 
-        self.linear = nn.Linear(final_conv_channels, self.num_classes)
+        self.linear = nn.Linear(final_conv_channels, self.num_classes, bias=bias)
         nn.init.normal_(self.linear.weight, 0, 0.01)
 
     def forward(self, x):
