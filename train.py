@@ -41,7 +41,8 @@ def train(config:dict) -> None:
             alpha=config['alpha'],
             se_ratio=config['se_ratio'],
             activation=config['activation'],
-            bias=config['bias']
+            bias=config['bias'],
+            remove_mean=config['remove_mean']
             )
 
     transforms = Compose([
